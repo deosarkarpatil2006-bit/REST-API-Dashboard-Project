@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Product explorer with live REST API data, search, filtering, sorting, and saved cart state.">
+  <title>Northstar | Product Explorer</title>
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to products</a>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="Northstar home"><span class="brand-mark" aria-hidden="true">N</span> Northstar <span class="brand-subtitle">STORE</span></a>
+    <form class="search-form" role="search" id="search-form">
+      <label class="visually-hidden" for="search-input">Search products</label>
+      <input id="search-input" type="search" placeholder="Search products…" autocomplete="off">
+      <button type="submit" aria-label="Submit search">⌕</button>
+    </form>
+    <button class="cart-button" id="cart-button" type="button" aria-label="View shopping cart">Cart <span id="cart-count" class="cart-count">0</span></button>
+  </header>
+
+  <main id="main" class="container">
+    <section class="hero" aria-labelledby="page-title">
+      <div><p class="eyebrow">THE NORTHSTAR COLLECTION</p><h1 id="page-title">Find your next favorite.</h1><p>Explore curated products with a fast, responsive shopping experience.</p></div>
+      <div class="hero-art" aria-hidden="true"><span class="orb orb-one"></span><span class="orb orb-two"></span><span class="hero-letter">N.</span></div>
+    </section>
+
+    <section class="toolbar" aria-label="Product controls">
+      <div class="category-tabs" role="group" aria-label="Filter by category" id="category-tabs">
+        <button class="category-tab active" type="button" data-category="all" aria-pressed="true">All products</button>
+        <button class="category-tab" type="button" data-category="men's clothing" aria-pressed="false">Men</button>
+        <button class="category-tab" type="button" data-category="women's clothing" aria-pressed="false">Women</button>
+        <button class="category-tab" type="button" data-category="jewelery" aria-pressed="false">Jewelry</button>
+        <button class="category-tab" type="button" data-category="electronics" aria-pressed="false">Electronics</button>
+      </div>
+      <div class="sort-control"><label for="sort-select">Sort by</label><select id="sort-select"><option value="featured">Featured</option><option value="price-asc">Price: low to high</option><option value="price-desc">Price: high to low</option><option value="title-asc">Name: A to Z</option><option value="rating-desc">Top rated</option></select></div>
+    </section>
+
+    <section aria-labelledby="results-title">
+      <div class="results-heading"><div><h2 id="results-title">Featured products</h2><p id="results-count" class="muted">Loading products…</p></div><button class="text-button" id="clear-filters" type="button">Clear filters</button></div>
+      <div id="error-banner" class="error-banner" role="alert" hidden><strong>We couldn’t load live products.</strong><p id="error-message">Check your connection and try again.</p><button class="button button-secondary" id="retry-button" type="button">Try again</button></div>
+      <div id="loading-grid" class="product-grid" aria-label="Loading products" aria-busy="true">
+        <div class="skeleton-card"><span class="skeleton image-skeleton"></span><span class="skeleton line-skeleton"></span><span class="skeleton short-skeleton"></span></div>
+        <div class="skeleton-card"><span class="skeleton image-skeleton"></span><span class="skeleton line-skeleton"></span><span class="skeleton short-skeleton"></span></div>
+        <div class="skeleton-card"><span class="skeleton image-skeleton"></span><span class="skeleton line-skeleton"></span><span class="skeleton short-skeleton"></span></div>
+        <div class="skeleton-card"><span class="skeleton image-skeleton"></span><span class="skeleton line-skeleton"></span><span class="skeleton short-skeleton"></span></div>
+      </div>
+      <div id="product-grid" class="product-grid" aria-live="polite" aria-busy="true"></div>
+      <p id="empty-state" class="empty-state" hidden>No products match those filters. Try another search or category.</p>
+    </section>
+
+    <section id="cart-section" class="cart-panel" aria-labelledby="cart-title" hidden>
+      <div class="results-heading"><div><h2 id="cart-title">Your cart</h2><p class="muted">Cart items are saved on this device.</p></div><button id="close-cart" class="text-button" type="button">Close</button></div>
+      <ul id="cart-items" class="cart-items"></ul>
+      <div class="cart-total"><strong>Total</strong><strong id="cart-total">$0.00</strong></div>
+      <button id="clear-cart" class="button button-secondary" type="button">Clear cart</button>
+    </section>
+
+    <footer class="footer"><span>© 2026 Northstar Store</span><span>Demo data provided by Fake Store API</span></footer>
+  </main>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
